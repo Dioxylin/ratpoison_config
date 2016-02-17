@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Select a ratpoison window by class.
+
+
+
+#ratpoison -c "select $(ratpoison -c 'windows %c^V%t' | grep Firefox | awk -F'^V' '{print $2}')"
+#[minozake@asdf ~]$ ratpoison -c $'windows %c\t%n' | awk -F'\t' '$1 ~ /Firefox/ {print $2}' | head -1
+

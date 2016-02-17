@@ -1,0 +1,41 @@
+#!/bin/sh
+
+RP_SCRIPT_DIR=$HOME/.config/ratpoison
+
+set -eu
+set -x
+
+# ratpoison virtual desktops
+#
+# Differentiated from workspaces in that each virtual desktop has a group of
+# windows coupled with a layout.  Workspaces only have frame layouts, and
+# groups only have windows.
+
+# TODO resolve 10==0 for rpws and gselect
+
+COMMAND="$1"
+TARGET="$2"
+
+TARGET_RPWS="$TARGET"
+TARGET_GSELECT="$TARGET"
+
+if [ "$TARGET_RPWS" == "0" ]; then
+	TARGET_RPWS="10"
+fi
+
+if [ "$(rpws current)" == "" ]; then
+	rpws 1
+	ratpoison -c "gselect 1"
+fi
+
+if [ "$TARGET_RPWS" == "$(rpws current)" ]; then
+	ratpoison -c 'echo Error: Is on current workspace'
+	exit 0
+fi
+
+if [ "$COMMAND" == "send" ]; then
+	ratpoison -c "gmove $TARGET_GSELECT" -c "next" || ratpoison -c "select -" -c "echo No more windows"
+elif [ "$COMMAND" == "change" ]; then
+	rpws "$TARGET_RPWS"
+	ratpoison -c "gselect $TARGET_GSELECT"
+fi

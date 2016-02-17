@@ -1,0 +1,46 @@
+#!/bin/sh
+
+set -eu
+set -x
+PS4='Line ${LINENO}: '
+
+COMMAND="$1"
+
+# Normalize the window numbers
+
+wlist="$(ratpoison -c 'windows %n')"
+
+index=0
+wlist_new="$index"
+for i in $wlist; do
+	ratpoison -c "number $index $i"
+	index=$((index+1))
+	wlist_new="$(echo -e "$wlist_new\n$index")"
+done
+
+
+wlist="$(echo "$wlist_new" | sed '$d')"
+
+if [ "$COMMAND" == "next" ]; then
+	cur="$(echo "$wlist" | head -1)"
+	max="$(echo "$wlist" | tail -1)"
+
+	ratpoison -c "number $((max+1)) $cur"
+
+	wlist="$(echo "$wlist" | sed -e '1d')"
+	wlist="$(echo -e "$wlist\n$((max+1))")"
+
+	for i in $wlist; do
+		ratpoison -c "number $((i-1)) $i"
+	done
+
+	ratpoison -c 'select 0'
+elif [ "$COMMAND" == "prev" ]; then
+	for i in $wlist; do
+		ratpoison -c "number $((i+1)) $i"
+	done
+	ratpoison -c "number 0 $((i+2))"
+	ratpoison -c 'select 0'
+fi
+
+ratpoison -c 'windows'

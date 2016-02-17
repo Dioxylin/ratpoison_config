@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -eu
+set -x
+
+COMMAND="$1"
+
+SESSION_NAME=rptmuxsess
+
+if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+	tmux new-session -ds "$SESSION_NAME"
+fi
+
+tmux new-window -t "$SESSION_NAME"
+tmux set-buffer -a $'\n'
+tmux set-buffer -a $"$COMMAND"
+tmux paste-buffer -d -t "$SESSION_NAME" -s ''
+tmux paste-buffer -d -t "$SESSION_NAME" -s ''

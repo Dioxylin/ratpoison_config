@@ -1,0 +1,119 @@
+# Some problems I have with ratpoison:
+#
+#   You can't just set a modifier key as a prefix.  I would like to just set
+#   Super as my prefix key and be able to have all the normal keybinds as if it
+#   were the prefix.
+#
+#   The workspaces implementation could use some work.
+#
+#   Mouse focus isn't really grand.  It forces the focus to always be over the
+#   mouse, so if you change focus via keyboard, it switches to where the mouse
+#   is focused, and it gets annoying quickly.  I guess "sloppy focus" is more
+#   my kind of thing.
+#
+#   Can't set monitor directions so that you could just theoretically have a
+#   semless screen.  I would like to have two monitors be one "screen" in
+#   ratpoison, so I can juse move the frame selector left to go to the left
+#   monitor.
+#
+#   Can't force gimp to not hide its windows on workspace switch.  Annoyimg as
+#   hell, even though it seems like this should finally be THE perfect window
+#   manager for the weird application since I can force frames to never change.
+#   Does even work on chaste mode.
+#
+#   Sometimes trayer will stay in the middle of the screen on startup.  This is
+#   probably a problem on my end.
+#
+escape s-a
+
+rudeness 0
+
+set winfmt %n:%c:%s:%t 
+
+setenv RPSCRIPTDIR $HOME/.config/ratpoison
+
+# For trayer implementing systray
+unmanage panel
+set padding 0 0 0 25
+
+#exec rpws restore $HOME/.ratpoison/rpws.layout
+
+# Frames
+definekey top s-Left  focusleft
+definekey top s-Right focusright
+definekey top s-Up    focusup
+definekey top s-Down  focusdown
+definekey top s-C-Left  exchangeleft
+definekey top s-C-Right exchangeright
+definekey top s-C-Up    exchangeup
+definekey top s-C-Down  exchangedown
+definekey top s-Q only
+definekey top s-s split
+definekey top s-S hsplit
+definekey top s-R remove
+definekey top s-r resize
+definekey top s-d dedicate
+
+# Windows; create, delete, info
+definekey top s-c exec xterm -rv
+definekey top s-k delete
+definekey top s-K kill
+definekey top s-w windows
+definekey top s-n next
+definekey top s-p prev
+
+#definekey top S-s-Left  prevscreen
+#definekey top S-s-Right nextscreen
+
+# Select windows in the same class
+#definekey top s-Tab inext
+#definekey top s-ISO_Left_Tab iprev
+#definekey top s-n cnext
+#definekey top s-p cprev
+
+# ratpoison
+definekey top s-m lastmsg
+definekey top s-exclam exec
+definekey top s-C-exclam colon exec xterm -rv -hold -e 
+
+#definekey top s-minus select -
+
+#exec rpws init 10
+#exec rpws restore $HOME/.ratpoison/rpws.layout
+
+definekey top s-0 exec $HOME/.config/ratpoison/rpvd change 0
+definekey top s-1 exec $HOME/.config/ratpoison/rpvd change 1
+definekey top s-2 exec $HOME/.config/ratpoison/rpvd change 2
+definekey top s-3 exec $HOME/.config/ratpoison/rpvd change 3
+definekey top s-4 exec $HOME/.config/ratpoison/rpvd change 4
+definekey top s-5 exec $HOME/.config/ratpoison/rpvd change 5
+definekey top s-6 exec $HOME/.config/ratpoison/rpvd change 6
+definekey top s-7 exec $HOME/.config/ratpoison/rpvd change 7
+definekey top s-8 exec $HOME/.config/ratpoison/rpvd change 8
+definekey top s-9 exec $HOME/.config/ratpoison/rpvd change 9
+
+definekey top s-C-0 exec $HOME/.config/ratpoison/rpvd send 0
+definekey top s-C-1 exec $HOME/.config/ratpoison/rpvd send 1
+definekey top s-C-2 exec $HOME/.config/ratpoison/rpvd send 2
+definekey top s-C-3 exec $HOME/.config/ratpoison/rpvd send 3
+definekey top s-C-4 exec $HOME/.config/ratpoison/rpvd send 4
+definekey top s-C-5 exec $HOME/.config/ratpoison/rpvd send 5
+definekey top s-C-6 exec $HOME/.config/ratpoison/rpvd send 6
+definekey top s-C-7 exec $HOME/.config/ratpoison/rpvd send 7
+definekey top s-C-8 exec $HOME/.config/ratpoison/rpvd send 8
+definekey top s-C-9 exec $HOME/.config/ratpoison/rpvd send 9
+
+# Window groups
+gnewbg 1
+gnewbg 2
+gnewbg 3
+gnewbg 4
+gnewbg 5
+gnewbg 6
+gnewbg 7
+gnewbg 8
+gnewbg 9
+
+exec $HOME/.config/ratpoison/rpvd change 0
+definekey top s-g groups
+
