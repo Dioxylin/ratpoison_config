@@ -12,14 +12,14 @@
 #   my kind of thing.
 #
 #   Can't set monitor directions so that you could just theoretically have a
-#   semless screen.  I would like to have two monitors be one "screen" in
-#   ratpoison, so I can juse move the frame selector left to go to the left
+#   seamless screen.  I would like to have two monitors be one "screen" in
+#   ratpoison, so I can just move the frame selector left to go to the left
 #   monitor.
 #
-#   Can't force gimp to not hide its windows on workspace switch.  Annoyimg as
+#   Can't force gimp to not hide its windows on workspace switch.  Annoying as
 #   hell, even though it seems like this should finally be THE perfect window
 #   manager for the weird application since I can force frames to never change.
-#   Does even work on chaste mode.
+#   Doesn't even work on chaste mode.
 #
 #   Sometimes trayer will stay in the middle of the screen on startup.  This is
 #   probably a problem on my end.
